@@ -1,68 +1,94 @@
-import calculator.WorkOperation;
+import calculator.Operation;
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertThrows;
 
 public class tests {
 
     @Test
-    public void scoreSum() {
-        WorkOperation operation = new WorkOperation();
-        int x = 3;
-        int y = 2;
-        operation.setSum(x, y);
-        Assert.assertEquals("Сумма неверна", 5, operation.getSum());
+    public void scoreSum() throws Exception {
+        Operation operation = new Operation();
+        Double x = 1.1;
+        Double y = 2.2;
+        String z = "+";
+        operation.setResult(x, y, z);
+       // Assert.assertEquals("Сумма неверна", 3.3000000000000003 , 0);
+        Assert.assertEquals(3.3000000000000003, operation.getResult(), 0);
     }
 
     @Test
-    public void scoreSub() {
-        WorkOperation operation = new WorkOperation();
-        int x = 4;
-        int y = 2;
-        operation.setSub(x, y);
-        Assert.assertEquals("Разность неверна", 2, operation.getSub());
+    public void scoreSub() throws Exception {
+        Operation operation = new Operation();
+        Double x = 2.2;
+        Double y = 1.1;
+        String z = "-";
+        operation.setResult(x, y, z);
+        Assert.assertEquals(1.1, operation.getResult(), 0);
     }
 
     @Test
     public void scoreMul() throws Exception {
-        WorkOperation operation = new WorkOperation();
-        int x = 4;
-        int y = 2;
-        operation.setMul(x, y);
-        Assert.assertEquals("Неверный результат", 8, operation.getMul());
+        Operation operation = new Operation();
+        Double x = 2.2;
+        Double y = 3.3;
+        String z = "*";
+        operation.setResult(x, y, z);
+        Assert.assertEquals(7.26, operation.getResult(), 0);
     }
 
     @Test
     public void scoreDiv() throws Exception {
-        WorkOperation operation = new WorkOperation();
-        int x = 6;
-        int y = 2;
-        operation.setDiv(x, y);
-        Assert.assertEquals("Неверный результат", 3, operation.getDiv());
+        Operation operation = new Operation();
+        Double x = 6.6;
+        Double y = 2.2;
+        String z = "/";
+        operation.setResult(x, y, z);
+        Assert.assertEquals(2.9999999999999996, operation.getResult(), 0);
     }
 
     @Test
-    public void tryDivisionByZero() {
-        WorkOperation operation = new WorkOperation();
-        int x = 2;
-        int y = 0;
-        try {
-            operation.setDiv(x, y);
-            Assert.fail("Expected Division by zero");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void tryDivisionByZero() throws Exception {
+        Throwable exception = assertThrows(
+                Exception.class,
+                () -> {
+                    Operation operation = new Operation();
+                    Double x = 6.6;
+                    Double y = 0.0;
+                    String z = "/";
+                    operation.setResult(x, y, z);
+                }
+        );
+        Assert.assertEquals("Division by zero", exception.getMessage());
     }
 
     @Test
-    public void tryDivisionZeroByZero() {
-        WorkOperation operation = new WorkOperation();
-        int x = 0;
-        int y = 0;
-        try {
-            operation.setDiv(x, y);
-            Assert.fail("Expected Division zero by zero");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void tryDivisionZeroByZero() throws Exception {
+        Throwable exception = assertThrows(
+                Exception.class,
+                () -> {
+                    Operation operation = new Operation();
+                    Double x = 0.0;
+                    Double y = 0.0;
+                    String z = "/";
+                    operation.setResult(x, y, z);
+                }
+        );
+        Assert.assertEquals("Division zero by zero", exception.getMessage());
+    }
+
+    @Test
+    public void operationNotSelected() {
+        Throwable exception = assertThrows(
+                Exception.class,
+                () -> {
+                    Operation operation = new Operation();
+                    Double x = 0.0;
+                    Double y = 0.0;
+                    String z = "";
+                    operation.setResult(x, y, z);
+                }
+        );
+        Assert.assertEquals("Operation not selected", exception.getMessage());
     }
 }

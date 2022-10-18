@@ -25,7 +25,7 @@ public class Collections {
 //        - Вывести на консоль это слово и сколько раз оно встречается в файле
 
     public static void main(String[] args) {
-        startProgram("files/words.txt");
+        startProgram("C:/Users/Joey/Desktop/test.txt");
     }
 
     public static void startProgram(String filepath) {

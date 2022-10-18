@@ -14,6 +14,12 @@ public class Arrays {
         for (int i = 0; i < array.length; i++) {
             if (array[i] < maxMinus) {
                 maxMinus = array[i];
+                break;
+            }
+        }
+        for (int i = 0; i < array.length; i++) {
+            if (maxMinus < array[i] && array[i] < 0) {
+                maxMinus = array[i];
                 minusPosition = i;
             }
         }
@@ -35,6 +41,7 @@ public class Arrays {
         // Вывод минимального положительного элемента массива
         System.out.println("Минимальное положительное значение :" + minPlus);
         // Изменение мест минимального положительного и максимального отрицательного элементов массива
+        System.out.println("Изменяем позицию минимального положительго и максимального отрицательного элементов в массиве");
         array[minusPosition] = minPlus;
         array[plusPosition] = maxMinus;
         for (int tests : array) {

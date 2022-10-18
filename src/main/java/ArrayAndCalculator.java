@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ArrayAndCalculator {
@@ -40,10 +41,12 @@ public class ArrayAndCalculator {
                 // вывод результата с форматированием до 4-ех символов после запятой
                 System.out.printf("Результат операции: %.4f", result);
                 scanner.close();
+                break;
             }
             case (2):
                 int count = 0;
                 String maxString = "";
+                ArrayList<String> word = new ArrayList<>();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
                 System.out.println("Введите количество слов:");
                 // задаем массив слов
@@ -59,11 +62,20 @@ public class ArrayAndCalculator {
                 for (int i = 0; i < Integer.parseInt(size); i++) {
                     if (array[i].chars().count() > count) {
                         count = (int) array[i].chars().count();
+                    }
+                }
+                for (int i = 0; i < Integer.parseInt(size); i++) {
+                    if (array[i].chars().count() == count) {
                         maxString = array[i];
+                        word.add(maxString);
                     }
                 }
                 // вывод результата на консоль
-                System.out.println("Самое длинное слово: "+ maxString);
+                System.out.println("Самое длинное слово/слова: ");
+                for (String words : word) {
+                    System.out.println(words);
+                }
+                break;
         }
     }
 }
