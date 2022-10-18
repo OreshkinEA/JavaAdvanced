@@ -1,74 +1,48 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class Collections {
-
-//    Есть входной файл с набором слов, написанных через пробел
-//
-//Необходимо:
-//
-//        - Прочитать слова из файла.
-//
-//        - Отсортировать в алфавитном порядке.
-//
-//        - Посчитать сколько раз каждое слово встречается в файле
-//
-//        - Вывести статистику на консоль
-//
-//        - Найти слово с максимальным количеством повторений
-//
-//        - Вывести на консоль это слово и сколько раз оно встречается в файле
-
     public static void main(String[] args) {
-        startProgram("C:/Users/Joey/Desktop/test.txt");
+        readFileAndCountWords("files/test.txt");
     }
 
-    public static void startProgram(String filepath) {
-        Map<String, Integer> wordList = new TreeMap<>();
-        String text = readFile(filepath);
-        String[] words = text.split(filepath);
+    public static void readFileAndCountWords(String filepath) {
+        Map<String, Integer> wordsList = new TreeMap<>();
+        String text = readTextFile(filepath);
+        String[] words = text.split(" ");
         for (String word : words) {
-            if (!wordList.containsKey(word)) {
-                wordList.put(word,1);
-            } else {
-                wordList.put(word, wordList.get(word)+1);
-            }
+            if (!wordsList.containsKey(word)) wordsList.put(word, 1);
+            else wordsList.put(word, wordsList.get(word) + 1);
         }
-        System.out.println("Слово/Количество повторений");
+        System.out.println("|Слово|Количество повторений|");
         String key = null;
         int value = 0;
-        int repit = 0;
-        for (Map.Entry<String, Integer> entry : wordList.entrySet()) {
+        int count = 0;
+        for (Map.Entry<String, Integer> entry : wordsList.entrySet()) {
             key = entry.getKey();
             value = entry.getValue();
-            if (value > repit) {
-                repit = value;
-                System.out.println(key + " " + value);
-            }
+            if (value > count) count = value;
+            System.out.println(String.format("|%s|%d|", key, value));
         }
-        for (Map.Entry<String, Integer> entry : wordList.entrySet()) {
+        for (Map.Entry<String, Integer> entry : wordsList.entrySet()) {
             key = entry.getKey();
             value = entry.getValue();
-            if (value == repit) {
-                System.out.println("\nСлово" + value + " встречается в файле"+ key + " раз");
-            }
+            if (value == count)
+                System.out.println(String.format("\nСлово '%s' встречается в файле %d раз(а)", key, value));
         }
     }
 
-    private static String readFile(String filepath) {
+    public static String readTextFile(String filepath) {
         File file = new File(filepath);
         String text = null;
         try (FileReader reader = new FileReader(file)) {
-            char[]buf = new char[256];
+            char[] buf = new char[256];
             int c;
-            while ((c = reader.read(buf)) > 0 ) {
+            while ((c = reader.read(buf)) > 0) {
                 if (c < 256) {
-                    buf = Arrays.copyOf(buf,c);
+                    buf = Arrays.copyOf(buf, c);
                 }
             }
             text = String.valueOf(buf);
