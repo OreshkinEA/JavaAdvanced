@@ -26,7 +26,6 @@ public class Main {
         try {
             x = String.valueOf(Double.parseDouble(str));
         } catch (NumberFormatException e) {
-            System.out.println("Ошибка при введении числа");
         }
         operation.setX(x);
         System.out.println("Введите число Y (можно указать дробное число, разделитель - точка/запятая)");
@@ -44,7 +43,6 @@ public class Main {
         try {
             y = String.valueOf(Double.parseDouble(str));
         } catch (NumberFormatException e) {
-            System.out.println("Ошибка при введении числа");
         }
         operation.setY(y);
         System.out.println("Выберите операцию: +, -, *, /");
@@ -61,7 +59,6 @@ public class Main {
         try {
             operation.setResult(x, y);
         } catch (NumberFormatException e) {
-            System.out.println("Введены некорректные данные");
         }
         System.out.printf("Результат операции: " + operation.getResult());
         reader.close();

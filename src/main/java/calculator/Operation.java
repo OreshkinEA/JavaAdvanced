@@ -36,36 +36,20 @@ public class Operation {
 
     public void setResult(String x, String y) throws Exception {
         if (this.z.equals("+")) {
-            try {
                 Double.parseDouble(x);
                 Double.parseDouble(y);
-            } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
-            }
             this.result = Double.parseDouble(x) + Double.parseDouble(y);
         } else if (z.equals("-")) {
-            try {
                 Double.parseDouble(x);
                 Double.parseDouble(y);
-            } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
-            }
             this.result = Double.parseDouble(x) - Double.parseDouble(y);
         } else if (z.equals("*")) {
-            try {
                 Double.parseDouble(x);
                 Double.parseDouble(y);
-            } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
-            }
             this.result = Double.parseDouble(x) * Double.parseDouble(y);
         } else if (z.equals("/")) {
-            try {
                 Double.parseDouble(x);
                 Double.parseDouble(y);
-            } catch (NumberFormatException e) {
-                System.out.println(e.getMessage());
-            }
             if (Double.parseDouble(y) != 0) {
                 this.result = Double.parseDouble(x) / Double.parseDouble(y);
             } else if ((Double.parseDouble(x) == 0) && (Double.parseDouble(y) == 0)) {
